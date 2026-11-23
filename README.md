@@ -25,6 +25,19 @@
 
 <img src="./docs/src/assets/overview.gif" />
 
+## smores56 fork
+
+This fork keeps v4.26.3's UI but uses an issue-only repository type, so issue
+queries no longer request `repository.branchProtectionRules` — a field private
+repositories on the Free plan cannot read
+([#562](https://github.com/dlvhdr/gh-dash/issues/562)). Build it with the
+`v4.26.3-sdlc` marker:
+
+```sh
+MISE_LOCKED=0 mise x go@1.27.1 -- go build \
+  -ldflags '-X github.com/dlvhdr/gh-dash/v4/cmd.Version=v4.26.3-sdlc' -o gh-dash .
+```
+
 ## ❤️ Sponsoring
 
 If you enjoy `DASH` and want to help, consider supporting the project with a

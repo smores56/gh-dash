@@ -13,6 +13,15 @@ import (
 	"github.com/dlvhdr/gh-dash/v4/internal/tui/theme"
 )
 
+// IssueRepository is the slice of Repository an issue query needs. The full
+// Repository requests branchProtectionRules, which GitHub withholds from private
+// repos on the Free plan and which issues never display.
+type IssueRepository struct {
+	Name          string
+	Owner         Owner
+	NameWithOwner string
+}
+
 type IssueData struct {
 	Number int
 	Title  string
@@ -25,7 +34,7 @@ type IssueData struct {
 	UpdatedAt         time.Time
 	CreatedAt         time.Time
 	Url               string
-	Repository        Repository
+	Repository        IssueRepository
 	Assignees         Assignees      `graphql:"assignees(first: 3)"`
 	Comments          IssueComments  `graphql:"comments(last: 15)"`
 	Reactions         IssueReactions `graphql:"reactions(first: 1)"`
